@@ -1,0 +1,370 @@
+@font-face {
+    font-family: "Satoro";
+    src: url("/fonts/Satoro/Satoro.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+html, body {
+    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #EACFB3;
+}
+
+.font-title {
+    font-family: "Are You Serious", cursive;
+}
+
+.font-satoro {
+    font-family: "Satoro", serif;
+}
+
+.ds-input {
+    padding: 0.5rem 0.75rem;
+    background: rgba(255, 255, 255, 0.7);
+    border: 3px solid #684D3A;
+    color: #684D3A;
+    border-radius: 0;
+    transition: border-color 0.15s;
+}
+.ds-input::placeholder { color: rgba(104, 77, 58, 0.4); }
+.ds-input:focus { outline: none; border-color: rgba(104, 77, 58, 0.8); }
+
+/* Design System: select variant with chevron aligned close to the text.
+   Native <select> chevrons sit in random browser-specific spots with
+   extra empty space; we hide the native chevron and draw our own. */
+.ds-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 0.75rem 2.25rem 0.75rem 0.75rem;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23684D3A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 0.75rem 0.5rem;
+}
+.ds-select::-ms-expand { display: none; }
+
+.ds-btn {
+    padding: 0.625rem 2rem;
+    border-radius: 0;
+    font-weight: 700;
+    transition: background-color 0.15s, opacity 0.15s;
+    cursor: pointer;
+}
+.ds-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.ds-btn-primary { background: #684D3A; color: #F6E5C7; border: 3px solid #684D3A; }
+.ds-btn-primary:hover { background: rgba(104, 77, 58, 0.9); border-color: rgba(104, 77, 58, 0.9); }
+
+.ds-btn-primary-inverted { background: #F6E5C7; color: #684D3A; border: 3px solid #684D3A; }
+.ds-btn-primary-inverted:hover { background: #E5D2AC; }
+
+.ds-btn-success { background: #91A160; color: #F6E5C7; border: 3px solid #91A160; }
+.ds-btn-success:hover { background: rgba(145, 161, 96, 0.9); border-color: rgba(145, 161, 96, 0.9); }
+
+.ds-btn-warning { background: #FFB774; color: #F6E5C7; border: 3px solid #FFB774; }
+.ds-btn-warning:hover { background: rgba(255, 183, 116, 0.9); border-color: rgba(255, 183, 116, 0.9); }
+
+.ds-btn-danger { background: #892808; color: #F6E5C7; border: 3px solid #892808; }
+.ds-btn-danger:hover { background: rgba(137, 40, 8, 0.9); border-color: rgba(137, 40, 8, 0.9); }
+
+.ds-btn-ghost { background: transparent; color: #684D3A; border: 3px solid #684D3A; }
+.ds-btn-ghost:hover { background: rgba(104, 77, 58, 0.1); }
+
+.ds-btn-primary, .ds-btn-primary-inverted, .ds-btn-success, .ds-btn-warning, .ds-btn-danger, .ds-btn-ghost {
+    padding: 0.625rem 2rem;
+    border-radius: 0;
+    font-weight: 700;
+    transition: background-color 0.15s, opacity 0.15s;
+    cursor: pointer;
+}
+.ds-btn-primary:disabled, .ds-btn-primary-inverted:disabled, .ds-btn-success:disabled, .ds-btn-warning:disabled,
+.ds-btn-danger:disabled, .ds-btn-ghost:disabled { opacity: 0.4; cursor: not-allowed; }
+
+::-webkit-scrollbar {
+    width: 14px;
+}
+::-webkit-scrollbar-track {
+    background: #EACFB3;
+}
+::-webkit-scrollbar-thumb {
+    background: #684D3A;
+    border: 2px solid #EACFB3;
+    border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(104, 77, 58, 0.8);
+}
+::-webkit-scrollbar-button:single-button {
+    background: #EACFB3;
+    display: block;
+    height: 14px;
+    width: 14px;
+}
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+    background: #EACFB3 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpolygon points='5,0 10,6 0,6' fill='%23684D3A'/%3E%3C/svg%3E") no-repeat center center;
+    background-size: 8px 5px;
+}
+::-webkit-scrollbar-button:single-button:vertical:increment {
+    background: #EACFB3 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpolygon points='5,6 10,0 0,0' fill='%23684D3A'/%3E%3C/svg%3E") no-repeat center center;
+    background-size: 8px 5px;
+}
+
+/* Firefox scrollbar — scoped to actual scroll containers instead of
+   the universal `*` selector, which the spec says walks every element
+   in the document. On long pages (profile, project journals) the
+   selector match itself becomes a non-trivial cost; the practical
+   effect is the same since the same colors apply wherever a scroll
+   bar can appear. */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #684D3A #EACFB3;
+}
+
+/* Docs prose: parchment/brown design system.
+   --doc-accent is provided by the docs page layout (bound to the current
+   section color). We deliberately do NOT set a default here, because doing so
+   creates a new inheritance scope that shadows the wrapper's value. The
+   var() fallbacks below handle the no-section case. */
+.prose-brown {
+  --tw-prose-body: rgb(104 77 58 / 0.85);
+  --tw-prose-headings: rgb(104 77 58);
+  --tw-prose-lead: rgb(104 77 58 / 0.7);
+  --tw-prose-links: rgb(104 77 58);
+  --tw-prose-bold: rgb(104 77 58);
+  --tw-prose-counters: rgb(104 77 58 / 0.6);
+  --tw-prose-bullets: rgb(104 77 58 / 0.4);
+  --tw-prose-hr: rgb(104 77 58 / 0.15);
+  --tw-prose-quotes: rgb(104 77 58);
+  --tw-prose-quote-borders: rgb(104 77 58 / 0.3);
+  --tw-prose-captions: rgb(104 77 58 / 0.6);
+  --tw-prose-code: rgb(104 77 58);
+  --tw-prose-pre-code: rgb(104 77 58);
+  --tw-prose-pre-bg: rgb(104 77 58 / 0.08);
+  --tw-prose-th-borders: rgb(104 77 58 / 0.2);
+  --tw-prose-td-borders: rgb(104 77 58 / 0.1);
+}
+
+/* Heading treatment: H1 gets a thick accent underline, H2 gets a left-border
+   accent bar. Both use the per-section --doc-accent variable which is set by
+   the page layout based on frontmatter `section`. Falls back to brown. */
+.prose-brown :where(h1):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-bottom: 0.35em;
+  border-bottom: 4px solid var(--doc-accent, #684D3A);
+  margin-bottom: 0.75em;
+  letter-spacing: -0.01em;
+}
+.prose-brown :where(h2):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  padding-left: 0.75rem;
+  border-left: 4px solid var(--doc-accent, #684D3A);
+  margin-top: 2.25em;
+  margin-bottom: 0.75em;
+  scroll-margin-top: 5rem;
+}
+.prose-brown :where(h3):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin-top: 1.75em;
+  scroll-margin-top: 5rem;
+}
+.prose-brown :where(h4):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  scroll-margin-top: 5rem;
+}
+.prose-brown :where(a):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  text-decoration: underline;
+  text-decoration-color: var(--doc-accent, #684D3A);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  font-weight: 600;
+  transition: background-color 0.12s;
+}
+.prose-brown :where(a):not(:where([class~="not-prose"],[class~="not-prose"] *)):hover {
+  opacity: 1;
+  background: color-mix(in srgb, var(--doc-accent, #684D3A) 14%, transparent);
+}
+.prose-brown :where(h1, h2, h3, h4, h5, h6) :where(a) {
+  text-decoration: none;
+  font-weight: inherit;
+}
+.prose-brown :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  background-color: rgb(104 77 58 / 0.1);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.125rem;
+  font-weight: 400;
+}
+.prose-brown :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::before,
+.prose-brown :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::after {
+  content: none;
+}
+.prose-brown :where(img):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  border: 3px solid rgb(104 77 58 / 0.2);
+  border-radius: 0;
+}
+.prose-brown :where(video):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  border: 3px solid rgb(104 77 58 / 0.2);
+  border-radius: 0;
+  width: 100%;
+}
+.prose-brown :where(blockquote):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  background-color: rgb(104 77 58 / 0.1);
+  border-left: 3px solid rgb(104 77 58 / 0.2);
+  padding: 0.75rem 1rem;
+  font-style: normal;
+  quotes: none;
+}
+.prose-brown :where(blockquote p:first-of-type):not(:where([class~="not-prose"],[class~="not-prose"] *))::before,
+.prose-brown :where(blockquote p:last-of-type):not(:where([class~="not-prose"],[class~="not-prose"] *))::after {
+  content: none;
+}
+.prose-brown :where(table):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  font-size: 0.875rem;
+}
+
+/* Shiki code blocks. Nuxt Content wraps fenced code in <pre class="shiki ...">
+   with inline color styles on spans. Keep the brown-tinted background from
+   --tw-prose-pre-bg, let Shiki set token colors. */
+.prose-brown :where(pre):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  background: rgb(104 77 58 / 0.08) !important;
+  border: 1px solid rgb(104 77 58 / 0.15);
+  border-radius: 0;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  line-height: 1.65;
+}
+.prose-brown :where(pre code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+.doc-toc {
+  position: sticky;
+  top: 1.5rem;
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
+}
+.doc-toc::-webkit-scrollbar {
+  width: 6px;
+}
+.doc-toc::-webkit-scrollbar-thumb {
+  background: rgb(104 77 58 / 0.3);
+}
+
+/* In-page mobile TOC details element */
+.prose-brown :where(.doc-toc-mobile):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  margin: 1rem 0 2rem;
+}
+
+/* Hardware/Software pick-path hero cards on /docs.
+   Inline markdown HTML can't use :hover pseudo-classes, so the lift and
+   shadow-grow effects live here. */
+.pick-path-card {
+  cursor: pointer;
+}
+.pick-path-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 0 rgb(104 77 58 / 0.25) !important;
+  background: rgb(86 63 47) !important;
+}
+.pick-path-card:active {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 rgb(104 77 58 / 0.25) !important;
+}
+@media (max-width: 640px) {
+  .pick-path-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+
+/* Single default transition used by every page navigation. Mixing
+   transition names across pages causes Nuxt's shared <Transition>
+   wrapper to get stuck in the leave phase when crossing a name
+   boundary (e.g. /profile "page" -> /dashboard "tutorial"), leaving
+   the learner on a frozen white page. One name for everything keeps
+   the wrapper coherent and all routes feel consistently animated. */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+/* Internal admin modal panel background — matches the layout's grid
+   pattern from app/layouts/internal.vue so the modal looks like it
+   belongs in the dashboard. Used together with the dark zinc panel
+   classes on the inline modals (perm reject, fraud review confirm,
+   level override, nuke user, etc). Defined here as a single utility
+   class because Tailwind's arbitrary-value syntax for the layered
+   background images was tripping the Vue SFC parser when stacked into
+   one mega class string. */
+.internal-modal-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Modal fade transition — same 0.25s easing as page transitions so
+   internal admin modals (perm reject, fraud review confirm, level
+   override, etc.) feel like they share the same animation language as
+   the rest of the dashboard. opacity-only because translating the
+   modal jumps the watermark grid behind it; fade is enough. */
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+.modal-fade-enter-active .modal-fade-panel,
+.modal-fade-leave-active .modal-fade-panel {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+.modal-fade-enter-from .modal-fade-panel {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.modal-fade-leave-to .modal-fade-panel {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+
+/* Stops the browser's HTML5 image-drag ghost from firing on any <img>.
+   Pure CSS, does not affect JS mouse / pointer events, so custom drag
+   logic (GameWorld farm tiles, etc.) keeps working. Opt-out via
+   draggable="true" on the <img> if a future feature ever needs native
+   image drag. */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+}
+
+img[draggable="true"] {
+  -webkit-user-drag: auto;
+  -khtml-user-drag: auto;
+  -moz-user-drag: auto;
+  -o-user-drag: auto;
+  user-drag: auto;
+}
+
+/* Highlight for terms matched on the destination doc page after coming
+   from a search hit. Written by app/composables/useDocsHighlight.ts. */
+.docs-search-highlight {
+  background: rgba(254, 215, 120, 0.6);
+  color: #684D3A;
+  padding: 0 2px;
+  border-radius: 2px;
+  font-weight: 600;
+}

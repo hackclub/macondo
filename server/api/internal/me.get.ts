@@ -1,0 +1,55 @@
+import {
+  canAccessInternalBackups,
+  canAccessInternalCertificates,
+  canAccessInternalOrders,
+  canViewAllOrders,
+  canAccessInternalEvents,
+  canAccessInternalReview,
+  canAccessInternalShippedProjects,
+  canAccessInternalShopAdmin,
+  canAccessInternalStats,
+  canAccessInternalSupport,
+  canAccessInternalUsers,
+  canDecideEventGifts,
+  canAccessNotificationAdmin,
+  canManageAnnouncements,
+  canManageMcpTokens,
+  canStartImpersonation,
+  canManageInternalFAQ,
+  canFulfillPendingGold,
+  isAbleToHandlePII,
+  isSupportOnly,
+} from "../../policies/internal";
+
+export default defineEventHandler(async (event) => {
+  const actor = event.context.user;
+
+  return {
+    id: actor.id,
+    name: actor.name,
+    image: actor.image,
+    roles: actor.roles,
+    permissions: {
+      canSeePii: isAbleToHandlePII(actor),
+      canImpersonate: canStartImpersonation(actor),
+      canAccessReview: canAccessInternalReview(actor),
+      canAccessOrders: canAccessInternalOrders(actor),
+      canViewAllOrders: canViewAllOrders(actor),
+      canAccessShopAdmin: canAccessInternalShopAdmin(actor),
+      canAccessStats: canAccessInternalStats(actor),
+      canAccessUsers: canAccessInternalUsers(actor),
+      canAccessBackups: canAccessInternalBackups(actor),
+      canAccessCertificates: canAccessInternalCertificates(actor),
+      canAccessSupport: canAccessInternalSupport(actor),
+      canAccessEvents: canAccessInternalEvents(actor),
+      canDecideEventGifts: canDecideEventGifts(actor),
+      canAccessShippedProjects: canAccessInternalShippedProjects(actor),
+      canAccessNotificationAdmin: canAccessNotificationAdmin(actor),
+      canManageAnnouncements: canManageAnnouncements(actor),
+      canManageMcpTokens: canManageMcpTokens(actor),
+      canManageFAQ: canManageInternalFAQ(actor),
+      canFulfillPendingGold: canFulfillPendingGold(actor),
+      isSupportOnly: isSupportOnly(actor),
+    },
+  };
+});

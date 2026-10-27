@@ -1,0 +1,14 @@
+export const GITHUB_API_URL = process.env.GITHUB_API_URL ?? "https://api.github.com";
+export const AIRTABLE_API_URL = process.env.AIRTABLE_API_URL ?? "https://api.airtable.com/v0";
+export const HACKATIME_URL = process.env.HACKATIME_URL ?? "https://hackatime.hackclub.com";
+export const HACKATIME_ADMIN_API_URL = `${HACKATIME_URL}/api/admin/v1`;
+export const HACK_CLUB_AUTH_URL = process.env.HACK_CLUB_AUTH_URL ?? "https://auth.hackclub.com";
+export const SLACK_API_URL = process.env.SLACK_API_URL ?? "https://slack.com/api";
+export const HC_CDN_URL = process.env.HC_CDN_URL ?? "https://cdn.hackclub.com";
+export const HACKCLUB_AI_URL = process.env.HACKCLUB_AI_URL ?? "https://ai.hackclub.com/proxy/v1";
+export const HCB_URL = process.env.HCB_URL ?? "https://hcb.hackclub.com";
+export const GITHUB_URL = process.env.GITHUB_URL ?? "https://github.com";
+export const AIRTABLE_CONTENT_API_URL = process.env.AIRTABLE_CONTENT_API_URL ?? "https://content.airtable.com/v0";
+export const LOOPS_API_URL = process.env.LOOPS_API_URL ?? "https://app.loops.so/api/v1";
+export const THESEUS_API_URL = process.env.THESEUS_API_URL ?? "https://mail.hackclub.com/api/v1";
+export const CACHET_URL = process.env.CACHET_URL ?? "https://cachet.dunkirk.sh";

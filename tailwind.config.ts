@@ -1,0 +1,92 @@
+import typography from "@tailwindcss/typography";
+import type { Config } from "tailwindcss";
+
+// Standalone file: the typography plugin function can't be serialized in nuxt.config.
+export default {
+  theme: {
+    extend: {
+      colors: {
+        "burnt-peach": {
+          "50": "#fcede8",
+          "100": "#fadad1",
+          "200": "#f4b5a4",
+          "300": "#ef9076",
+          "400": "#ea6b48",
+          "500": "#e4461b",
+          "600": "#b73815",
+          "700": "#892a10",
+          "800": "#5b1c0b",
+          "900": "#2e0e05",
+          "950": "#200a04",
+        },
+        "lime-moss": {
+          "50": "#f8f9eb",
+          "100": "#f1f3d8",
+          "200": "#e2e8b0",
+          "300": "#d4dc89",
+          "400": "#c5d062",
+          "500": "#b7c43b",
+          "600": "#929d2f",
+          "700": "#6e7623",
+          "800": "#494f17",
+          "900": "#25270c",
+          "950": "#1a1b08",
+        },
+        "tuscan-sun": {
+          "50": "#fdf7e7",
+          "100": "#fcefcf",
+          "200": "#f8dfa0",
+          "300": "#f5cf70",
+          "400": "#f2bf40",
+          "500": "#eeb011",
+          "600": "#bf8c0d",
+          "700": "#8f690a",
+          "800": "#5f4607",
+          "900": "#302303",
+          "950": "#211902",
+        },
+        "blue-grey": {
+          "50": "#e7f2fd",
+          "100": "#d0e5fb",
+          "200": "#a1cbf7",
+          "300": "#71b0f4",
+          "400": "#4296f0",
+          "500": "#137cec",
+          "600": "#0f63bd",
+          "700": "#0b4a8e",
+          "800": "#08325e",
+          "900": "#04192f",
+          "950": "#031121",
+        },
+        "textbox": {
+          "bg": "#23232C",
+          "border": "#644D2D",
+        },
+        "parchment": "#EACFB3",
+        "ds": {
+          "brown": "#684D3A",
+          "cream": "#F6E5C7",
+          "success": "#91A160",
+          "warning": "#FFB774",
+          "danger": "#892808",
+          // Fill only: yellow/amber borders are forbidden on public UI.
+          "gold": "#C79A3B",
+        },
+        "chocolate-brown": {
+          "50": "#fef4e6",
+          "100": "#fee9cd",
+          "200": "#fdd39b",
+          "300": "#fcbc69",
+          "400": "#fba637",
+          "500": "#fa9005",
+          "600": "#c87304",
+          "700": "#965603",
+          "800": "#643a02",
+          "900": "#321d01",
+          "950": "#231401",
+        },
+      },
+    },
+  },
+  plugins: [typography],
+} satisfies Partial<Config>;

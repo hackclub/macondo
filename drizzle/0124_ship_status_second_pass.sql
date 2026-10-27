@@ -1,0 +1,13 @@
+-- Adds the 'pending_second_pass' holding status to ship_status. A human
+-- reviewer's approval of a queue-reviewed hardware/software ship lands the
+-- ship here so a supaadmin can double-check before any reward, notification,
+-- or Unified sync fires (see server/lib/finalize-ship-approval.ts). Auto-
+-- approved guide ships and uwu auto-bounces never use this value.
+--
+-- The enum value is added in its OWN migration, with no statement that uses
+-- it, because Postgres forbids referencing a freshly-added enum value in the
+-- same transaction it was added (the column-adding migration 0125 only adds
+-- text/integer/jsonb columns and never references the enum, so it is safe on
+-- its own). IF NOT EXISTS keeps this re-runnable on prod state per the
+-- "Migrations must apply to prod" rule.
+ALTER TYPE "public"."ship_status" ADD VALUE IF NOT EXISTS 'pending_second_pass';

@@ -1,0 +1,1217 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1776833766336,
+      "tag": "0000_mysterious_makkari",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1776833766336,
+      "tag": "0003_small_shinobi_shaw",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1776833766336,
+      "tag": "0004_ordinary_mastermind",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1776833766336,
+      "tag": "0005_lazy_riptide",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1776833766336,
+      "tag": "0006_phase_review_flow",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1776833766336,
+      "tag": "0007_shop_admin_overhaul",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1776833766336,
+      "tag": "0008_guide_rename",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1776833766336,
+      "tag": "0009_internal_hcb_oauth",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1776833766336,
+      "tag": "0011_safe_eternals",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1776833766336,
+      "tag": "0012_tearful_electro",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1776833766346,
+      "tag": "0013_woozy_triton",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1776833766346,
+      "tag": "0014_rainy_phil_sheldon",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1776833766347,
+      "tag": "0015_open_forge",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "7",
+      "when": 1776833766347,
+      "tag": "0016_worried_crusher_hogan",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "7",
+      "when": 1776833766347,
+      "tag": "0017_noisy_medusa",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "7",
+      "when": 1776833766347,
+      "tag": "0018_lying_master_chief",
+      "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1776833766347,
+      "tag": "0019_third_rhodey",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "7",
+      "when": 1776833766347,
+      "tag": "0020_currency_amount_numeric",
+      "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1776833766347,
+      "tag": "0021_currency_fruit_type",
+      "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "7",
+      "when": 1776833766347,
+      "tag": "0022_shop_item_translations",
+      "breakpoints": true
+    },
+    {
+      "idx": 20,
+      "version": "7",
+      "when": 1776833766353,
+      "tag": "0024_needs_funding_hours",
+      "breakpoints": true
+    },
+    {
+      "idx": 21,
+      "version": "7",
+      "when": 1776910693230,
+      "tag": "0025_resync_serial_sequences",
+      "breakpoints": true
+    },
+    {
+      "idx": 22,
+      "version": "7",
+      "when": 1776925592913,
+      "tag": "0026_shop_regional_pricing",
+      "breakpoints": true
+    },
+    {
+      "idx": 23,
+      "version": "7",
+      "when": 1776974939093,
+      "tag": "0027_referral_system",
+      "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1776977190025,
+      "tag": "0028_nps_feedback",
+      "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "7",
+      "when": 1776979591072,
+      "tag": "0029_ship_reviewer_note",
+      "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "7",
+      "when": 1776988341074,
+      "tag": "0030_india_region_from_asia",
+      "breakpoints": true
+    },
+    {
+      "idx": 27,
+      "version": "7",
+      "when": 1776989087033,
+      "tag": "0031_shop_max_per_user",
+      "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "7",
+      "when": 1776989911089,
+      "tag": "0032_ship_decision_reversed_notification",
+      "breakpoints": true
+    },
+    {
+      "idx": 29,
+      "version": "7",
+      "when": 1776990498969,
+      "tag": "0033_seed_stickers_shop_item",
+      "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "7",
+      "when": 1777041696379,
+      "tag": "0034_shop_item_requests",
+      "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "7",
+      "when": 1777044156139,
+      "tag": "0035_faq_tables",
+      "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "7",
+      "when": 1777044310632,
+      "tag": "0036_used_ai",
+      "breakpoints": true
+    },
+    {
+      "idx": 33,
+      "version": "7",
+      "when": 1777048076692,
+      "tag": "0037_rename_project_tier_to_level",
+      "breakpoints": true
+    },
+    {
+      "idx": 34,
+      "version": "7",
+      "when": 1777700000000,
+      "tag": "0038_nps_response_replies",
+      "breakpoints": true
+    },
+    {
+      "idx": 35,
+      "version": "7",
+      "when": 1777800000000,
+      "tag": "0039_pending_fruit",
+      "breakpoints": true
+    },
+    {
+      "idx": 36,
+      "version": "7",
+      "when": 1777900000000,
+      "tag": "0040_nps_reply_inbound",
+      "breakpoints": true
+    },
+    {
+      "idx": 37,
+      "version": "7",
+      "when": 1778000000000,
+      "tag": "0041_unlocked_at_default",
+      "breakpoints": true
+    },
+    {
+      "idx": 38,
+      "version": "7",
+      "when": 1778100000000,
+      "tag": "0042_shop_fruit_pricing",
+      "breakpoints": true
+    },
+    {
+      "idx": 39,
+      "version": "7",
+      "when": 1778200000000,
+      "tag": "0043_drop_paired_tx_id",
+      "breakpoints": true
+    },
+    {
+      "idx": 40,
+      "version": "7",
+      "when": 1778300000000,
+      "tag": "0044_shop_requires_shipped_project",
+      "breakpoints": true
+    },
+    {
+      "idx": 41,
+      "version": "7",
+      "when": 1778400000000,
+      "tag": "0045_ship_hours_decimal",
+      "breakpoints": true
+    },
+    {
+      "idx": 42,
+      "version": "7",
+      "when": 1778500000000,
+      "tag": "0046_app_settings",
+      "breakpoints": true
+    },
+    {
+      "idx": 43,
+      "version": "7",
+      "when": 1778600000000,
+      "tag": "0047_shop_item_modifiers",
+      "breakpoints": true
+    },
+    {
+      "idx": 44,
+      "version": "7",
+      "when": 1778700000000,
+      "tag": "0048_hackatime_total_seconds",
+      "breakpoints": true
+    },
+    {
+      "idx": 45,
+      "version": "7",
+      "when": 1778800000000,
+      "tag": "0049_journal_decimal_hours",
+      "breakpoints": true
+    },
+    {
+      "idx": 46,
+      "version": "7",
+      "when": 1778900000000,
+      "tag": "0050_brazil_region_seed",
+      "breakpoints": true
+    },
+    {
+      "idx": 47,
+      "version": "7",
+      "when": 1779000000000,
+      "tag": "0051_subsequent_grant_request",
+      "breakpoints": true
+    },
+    {
+      "idx": 48,
+      "version": "7",
+      "when": 1779100000000,
+      "tag": "0052_collapse_project_type_to_single",
+      "breakpoints": true
+    },
+    {
+      "idx": 49,
+      "version": "7",
+      "when": 1779200000000,
+      "tag": "0053_grant_send_action_and_replaces",
+      "breakpoints": true
+    },
+    {
+      "idx": 50,
+      "version": "7",
+      "when": 1779300000000,
+      "tag": "0054_daily_project_activity",
+      "breakpoints": true
+    },
+    {
+      "idx": 51,
+      "version": "7",
+      "when": 1779400000000,
+      "tag": "0055_support_ticket_dedup_key",
+      "breakpoints": true
+    },
+    {
+      "idx": 52,
+      "version": "7",
+      "when": 1779500000000,
+      "tag": "0056_dedupe_hackatime_projects",
+      "breakpoints": true
+    },
+    {
+      "idx": 53,
+      "version": "7",
+      "when": 1779600000000,
+      "tag": "0057_shop_item_source",
+      "breakpoints": true
+    },
+    {
+      "idx": 54,
+      "version": "7",
+      "when": 1779700000000,
+      "tag": "0058_streak_days_and_freeze_default",
+      "breakpoints": true
+    },
+    {
+      "idx": 55,
+      "version": "7",
+      "when": 1779800000000,
+      "tag": "0059_review_overhaul",
+      "breakpoints": true
+    },
+    {
+      "idx": 56,
+      "version": "7",
+      "when": 1779900000000,
+      "tag": "0060_per_project_streaks_pivot",
+      "breakpoints": true
+    },
+    {
+      "idx": 57,
+      "version": "7",
+      "when": 1780000000000,
+      "tag": "0061_add_shop_item_pinned",
+      "breakpoints": true
+    },
+    {
+      "idx": 58,
+      "version": "7",
+      "when": 1780100000000,
+      "tag": "0062_synthetic_shop_pinned",
+      "breakpoints": true
+    },
+    {
+      "idx": 59,
+      "version": "7",
+      "when": 1780200000000,
+      "tag": "0063_dau_snapshots",
+      "breakpoints": true
+    },
+    {
+      "idx": 60,
+      "version": "7",
+      "when": 1780300000000,
+      "tag": "0064_split_decision_justification",
+      "breakpoints": true
+    },
+    {
+      "idx": 61,
+      "version": "7",
+      "when": 1780400000000,
+      "tag": "0065_nps_resolved",
+      "breakpoints": true
+    },
+    {
+      "idx": 62,
+      "version": "7",
+      "when": 1780500000000,
+      "tag": "0066_project_ideas",
+      "breakpoints": true
+    },
+    {
+      "idx": 63,
+      "version": "7",
+      "when": 1780600000000,
+      "tag": "0067_project_idea_category",
+      "breakpoints": true
+    },
+    {
+      "idx": 64,
+      "version": "7",
+      "when": 1780700000000,
+      "tag": "0068_landing_page_clicks",
+      "breakpoints": true
+    },
+    {
+      "idx": 65,
+      "version": "7",
+      "when": 1780800000000,
+      "tag": "0069_shop_item_stars",
+      "breakpoints": true
+    },
+    {
+      "idx": 66,
+      "version": "7",
+      "when": 1780900000000,
+      "tag": "0070_idea_resources",
+      "breakpoints": true
+    },
+    {
+      "idx": 67,
+      "version": "7",
+      "when": 1781000000000,
+      "tag": "0071_journal_dedup_key",
+      "breakpoints": true
+    },
+    {
+      "idx": 68,
+      "version": "7",
+      "when": 1781100000000,
+      "tag": "0072_shop_order_cancelled",
+      "breakpoints": true
+    },
+    {
+      "idx": 69,
+      "version": "7",
+      "when": 1781200000000,
+      "tag": "0073_ysws_fraud",
+      "breakpoints": true
+    },
+    {
+      "idx": 70,
+      "version": "7",
+      "when": 1781300000000,
+      "tag": "0074_decimal_hours",
+      "breakpoints": true
+    },
+    {
+      "idx": 71,
+      "version": "7",
+      "when": 1781400000000,
+      "tag": "0075_rename_ysws_to_fraud",
+      "breakpoints": true
+    },
+    {
+      "idx": 72,
+      "version": "7",
+      "when": 1781500000000,
+      "tag": "0076_ship_airtable_record_id",
+      "breakpoints": true
+    },
+    {
+      "idx": 73,
+      "version": "7",
+      "when": 1781600000000,
+      "tag": "0077_support_message_edit_delete",
+      "breakpoints": true
+    },
+    {
+      "idx": 74,
+      "version": "7",
+      "when": 1781700000000,
+      "tag": "0078_hca_verification_status",
+      "breakpoints": true
+    },
+    {
+      "idx": 75,
+      "version": "7",
+      "when": 1781800000000,
+      "tag": "0079_auto_use_streak_freezes",
+      "breakpoints": true
+    },
+    {
+      "idx": 76,
+      "version": "7",
+      "when": 1781900000000,
+      "tag": "0080_project_auto_use_streak_freezes",
+      "breakpoints": true
+    },
+    {
+      "idx": 77,
+      "version": "7",
+      "when": 1782000000000,
+      "tag": "0081_tutorial_bonus_backfill",
+      "breakpoints": true
+    },
+    {
+      "idx": 78,
+      "version": "7",
+      "when": 1782100000000,
+      "tag": "0082_slack_macondo_auto_invited_at",
+      "breakpoints": true
+    },
+    {
+      "idx": 79,
+      "version": "7",
+      "when": 1782200000000,
+      "tag": "0083_project_upvotes",
+      "breakpoints": true
+    },
+    {
+      "idx": 80,
+      "version": "7",
+      "when": 1782300000000,
+      "tag": "0084_ship_streak_snapshot",
+      "breakpoints": true
+    },
+    {
+      "idx": 81,
+      "version": "7",
+      "when": 1782400000000,
+      "tag": "0085_notification_username_backfill",
+      "breakpoints": true
+    },
+    {
+      "idx": 82,
+      "version": "7",
+      "when": 1782500000000,
+      "tag": "0086_remove_unshipped_upvotes",
+      "breakpoints": true
+    },
+    {
+      "idx": 83,
+      "version": "7",
+      "when": 1782800000000,
+      "tag": "0087_ship_plagiarism_check",
+      "breakpoints": true
+    },
+    {
+      "idx": 84,
+      "version": "7",
+      "when": 1782600000000,
+      "tag": "0088_reviewer_role_split",
+      "breakpoints": true
+    },
+    {
+      "idx": 85,
+      "version": "7",
+      "when": 1782700000000,
+      "tag": "0089_joebilly_to_fraudster",
+      "breakpoints": true
+    },
+    {
+      "idx": 86,
+      "version": "7",
+      "when": 1782900000000,
+      "tag": "0090_plagiarism_index",
+      "breakpoints": true
+    },
+    {
+      "idx": 87,
+      "version": "7",
+      "when": 1783000000000,
+      "tag": "0091_starter_fab_blob_sha",
+      "breakpoints": true
+    },
+    {
+      "idx": 88,
+      "version": "7",
+      "when": 1783100000000,
+      "tag": "0092_indexed_file_fab_fingerprint",
+      "breakpoints": true
+    },
+    {
+      "idx": 89,
+      "version": "7",
+      "when": 1783200000000,
+      "tag": "0093_indexed_repo_epro_fingerprint",
+      "breakpoints": true
+    },
+    {
+      "idx": 90,
+      "version": "7",
+      "when": 1783300000000,
+      "tag": "0094_indexed_repo_stasis",
+      "breakpoints": true
+    },
+    {
+      "idx": 91,
+      "version": "7",
+      "when": 1783400000000,
+      "tag": "0095_shop_fruit_level_category",
+      "breakpoints": true
+    },
+    {
+      "idx": 92,
+      "version": "7",
+      "when": 1783500000000,
+      "tag": "0096_currency_gold_only",
+      "breakpoints": true
+    },
+    {
+      "idx": 93,
+      "version": "7",
+      "when": 1783600000000,
+      "tag": "0097_project_streak_review_protection",
+      "breakpoints": true
+    },
+    {
+      "idx": 94,
+      "version": "7",
+      "when": 1783700000000,
+      "tag": "0098_extra_fruity_starfruit",
+      "breakpoints": true
+    },
+    {
+      "idx": 95,
+      "version": "7",
+      "when": 1783800000000,
+      "tag": "0099_owo_check_columns",
+      "breakpoints": true
+    },
+    {
+      "idx": 96,
+      "version": "7",
+      "when": 1783900000000,
+      "tag": "0100_drop_legacy_plagiarism",
+      "breakpoints": true
+    },
+    {
+      "idx": 97,
+      "version": "7",
+      "when": 1784000000000,
+      "tag": "0101_drop_legacy_plagiarism_columns",
+      "breakpoints": true
+    },
+    {
+      "idx": 98,
+      "version": "7",
+      "when": 1784100000000,
+      "tag": "0102_ship_queue_entered_at",
+      "breakpoints": true
+    },
+    {
+      "idx": 99,
+      "version": "7",
+      "when": 1784200000000,
+      "tag": "0103_hca_refresh_token",
+      "breakpoints": true
+    },
+    {
+      "idx": 100,
+      "version": "7",
+      "when": 1784300000000,
+      "tag": "0104_streak_day_status_review_protected",
+      "breakpoints": true
+    },
+    {
+      "idx": 101,
+      "version": "7",
+      "when": 1784400000000,
+      "tag": "0105_docs_search_misses",
+      "breakpoints": true
+    },
+    {
+      "idx": 102,
+      "version": "7",
+      "when": 1784500000000,
+      "tag": "0106_migrate_fixed_shop_items",
+      "breakpoints": true
+    },
+    {
+      "idx": 103,
+      "version": "7",
+      "when": 1784600000000,
+      "tag": "0107_group_projects",
+      "breakpoints": true
+    },
+    {
+      "idx": 104,
+      "version": "7",
+      "when": 1784700000000,
+      "tag": "0108_virtual_service_shop_items",
+      "breakpoints": true
+    },
+    {
+      "idx": 105,
+      "version": "7",
+      "when": 1784800000000,
+      "tag": "0109_reviewer_gold",
+      "breakpoints": true
+    },
+    {
+      "idx": 106,
+      "version": "7",
+      "when": 1784900000000,
+      "tag": "0110_reviewer_feedback_and_username_sync",
+      "breakpoints": true
+    },
+    {
+      "idx": 107,
+      "version": "7",
+      "when": 1785000000000,
+      "tag": "0111_user_flags",
+      "breakpoints": true
+    },
+    {
+      "idx": 108,
+      "version": "7",
+      "when": 1785100000000,
+      "tag": "0112_ship_extra_fruity_notification",
+      "breakpoints": true
+    },
+    {
+      "idx": 109,
+      "version": "7",
+      "when": 1785200000000,
+      "tag": "0113_ship_uwu_check",
+      "breakpoints": true
+    },
+    {
+      "idx": 110,
+      "version": "7",
+      "when": 1785300000000,
+      "tag": "0114_streak_utc_anchor",
+      "breakpoints": true
+    },
+    {
+      "idx": 111,
+      "version": "7",
+      "when": 1785400000000,
+      "tag": "0115_project_hackatime_links",
+      "breakpoints": true
+    },
+    {
+      "idx": 112,
+      "version": "7",
+      "when": 1785500000000,
+      "tag": "0116_support_ticket_embeddings",
+      "breakpoints": true
+    },
+    {
+      "idx": 113,
+      "version": "7",
+      "when": 1785600000000,
+      "tag": "0117_streak_local_day_rebucket",
+      "breakpoints": true
+    },
+    {
+      "idx": 114,
+      "version": "7",
+      "when": 1785700000000,
+      "tag": "0118_ship_last_request_changes_reviewer",
+      "breakpoints": true
+    },
+    {
+      "idx": 115,
+      "version": "7",
+      "when": 1785800000000,
+      "tag": "0119_project_next_ship_reviewer_note",
+      "breakpoints": true
+    },
+    {
+      "idx": 116,
+      "version": "7",
+      "when": 1785900000000,
+      "tag": "0120_ship_fraud_review_skipped",
+      "breakpoints": true
+    },
+    {
+      "idx": 117,
+      "version": "7",
+      "when": 1786000000000,
+      "tag": "0121_streak_freeze_notification",
+      "breakpoints": true
+    },
+    {
+      "idx": 118,
+      "version": "7",
+      "when": 1786100000000,
+      "tag": "0122_streak_reminder_default_4",
+      "breakpoints": true
+    },
+    {
+      "idx": 119,
+      "version": "7",
+      "when": 1786200000000,
+      "tag": "0123_certificates",
+      "breakpoints": true
+    },
+    {
+      "idx": 120,
+      "version": "7",
+      "when": 1786300000000,
+      "tag": "0124_ship_status_second_pass",
+      "breakpoints": true
+    },
+    {
+      "idx": 121,
+      "version": "7",
+      "when": 1786400000000,
+      "tag": "0125_ship_second_pass_columns",
+      "breakpoints": true
+    },
+    {
+      "idx": 122,
+      "version": "7",
+      "when": 1786500000000,
+      "tag": "0126_reminder_local_hours",
+      "breakpoints": true
+    },
+    {
+      "idx": 123,
+      "version": "7",
+      "when": 1786600000000,
+      "tag": "0127_admin_announcement_enum",
+      "breakpoints": true
+    },
+    {
+      "idx": 124,
+      "version": "7",
+      "when": 1786700000000,
+      "tag": "0128_announcements",
+      "breakpoints": true
+    },
+    {
+      "idx": 125,
+      "version": "7",
+      "when": 1786800000000,
+      "tag": "0129_shop_item_category",
+      "breakpoints": true
+    },
+    {
+      "idx": 126,
+      "version": "7",
+      "when": 1786900000000,
+      "tag": "0130_project_notes",
+      "breakpoints": true
+    },
+    {
+      "idx": 127,
+      "version": "7",
+      "when": 1787000000000,
+      "tag": "0131_user_achievements",
+      "breakpoints": true
+    },
+    {
+      "idx": 128,
+      "version": "7",
+      "when": 1787100000000,
+      "tag": "0132_ship_user_streak_snapshot",
+      "breakpoints": true
+    },
+    {
+      "idx": 129,
+      "version": "7",
+      "when": 1787200000000,
+      "tag": "0133_user_hackatime_timezone",
+      "breakpoints": true
+    },
+    {
+      "idx": 130,
+      "version": "7",
+      "when": 1787300000000,
+      "tag": "0134_hot_path_indexes",
+      "breakpoints": true
+    },
+    {
+      "idx": 131,
+      "version": "7",
+      "when": 1787400000000,
+      "tag": "0135_next_ship_build_complete",
+      "breakpoints": true
+    },
+    {
+      "idx": 132,
+      "version": "7",
+      "when": 1787500000000,
+      "tag": "0136_ship_ari_columns",
+      "breakpoints": true
+    },
+    {
+      "idx": 133,
+      "version": "7",
+      "when": 1787500000001,
+      "tag": "0136_perf_tier1_indexes",
+      "breakpoints": true
+    },
+    {
+      "idx": 134,
+      "version": "7",
+      "when": 1787600000000,
+      "tag": "0137_ship_fraud_outcome",
+      "breakpoints": true
+    },
+    {
+      "idx": 135,
+      "version": "7",
+      "when": 1787700000000,
+      "tag": "0138_support_auto_resolve",
+      "breakpoints": true
+    },
+    {
+      "idx": 136,
+      "version": "7",
+      "when": 1787800000000,
+      "tag": "0139_event_enum_values",
+      "breakpoints": true
+    },
+    {
+      "idx": 137,
+      "version": "7",
+      "when": 1787900000000,
+      "tag": "0140_events",
+      "breakpoints": true
+    },
+    {
+      "idx": 138,
+      "version": "7",
+      "when": 1788000000000,
+      "tag": "0141_announcement_slack",
+      "breakpoints": true
+    },
+    {
+      "idx": 139,
+      "version": "7",
+      "when": 1788100000000,
+      "tag": "0142_shop_fulfillment_note",
+      "breakpoints": true
+    },
+    {
+      "idx": 140,
+      "version": "7",
+      "when": 1788200000000,
+      "tag": "0143_event_pending_review",
+      "breakpoints": true
+    },
+    {
+      "idx": 141,
+      "version": "7",
+      "when": 1788300000000,
+      "tag": "0144_ships_airtable_repair_cursor",
+      "breakpoints": true
+    },
+    {
+      "idx": 142,
+      "version": "7",
+      "when": 1788400000000,
+      "tag": "0145_shop_order_shipped_notification",
+      "breakpoints": true
+    },
+    {
+      "idx": 143,
+      "version": "7",
+      "when": 1788500000000,
+      "tag": "0146_analytics_pageviews",
+      "breakpoints": true
+    },
+    {
+      "idx": 144,
+      "version": "7",
+      "when": 1788600000000,
+      "tag": "0147_admin_gold_adjustment",
+      "breakpoints": true
+    },
+    {
+      "idx": 145,
+      "version": "7",
+      "when": 1788700000000,
+      "tag": "0148_show_and_tell_notifications",
+      "breakpoints": true
+    },
+    {
+      "idx": 146,
+      "version": "7",
+      "when": 1788800000000,
+      "tag": "0149_macondo_bans",
+      "breakpoints": true
+    },
+    {
+      "idx": 147,
+      "version": "7",
+      "when": 1788900000000,
+      "tag": "0150_mcp_tokens",
+      "breakpoints": true
+    },
+    {
+      "idx": 148,
+      "version": "7",
+      "when": 1789000000000,
+      "tag": "0151_shop_sale_price_and_available_until",
+      "breakpoints": true
+    },
+    {
+      "idx": 149,
+      "version": "7",
+      "when": 1789100000000,
+      "tag": "0152_ship_fraud_last_polled_at",
+      "breakpoints": true
+    },
+    {
+      "idx": 150,
+      "version": "7",
+      "when": 1789200000000,
+      "tag": "0153_support_message_slack_external_author",
+      "breakpoints": true
+    },
+    {
+      "idx": 151,
+      "version": "7",
+      "when": 1789300000000,
+      "tag": "0154_shop_request_votes",
+      "breakpoints": true
+    },
+    {
+      "idx": 152,
+      "version": "7",
+      "when": 1789400000000,
+      "tag": "0155_support_kb",
+      "breakpoints": true
+    },
+    {
+      "idx": 153,
+      "version": "7",
+      "when": 1789500000000,
+      "tag": "0156_hackatime_api_status",
+      "breakpoints": true
+    },
+    {
+      "idx": 154,
+      "version": "7",
+      "when": 1789600000000,
+      "tag": "0157_shop_request_dismiss_reason",
+      "breakpoints": true
+    },
+    {
+      "idx": 155,
+      "version": "7",
+      "when": 1789700000000,
+      "tag": "0158_project_soft_delete",
+      "breakpoints": true
+    },
+    {
+      "idx": 156,
+      "version": "7",
+      "when": 1789800000000,
+      "tag": "0159_shop_request_downvotes",
+      "breakpoints": true
+    },
+    {
+      "idx": 157,
+      "version": "7",
+      "when": 1789900000000,
+      "tag": "0160_projects_stasis_provenance",
+      "breakpoints": true
+    },
+    {
+      "idx": 158,
+      "version": "7",
+      "when": 1790000000000,
+      "tag": "0161_api_keys",
+      "breakpoints": true
+    },
+    {
+      "idx": 159,
+      "version": "7",
+      "when": 1790100000000,
+      "tag": "0162_event_rsvp_url",
+      "breakpoints": true
+    },
+    {
+      "idx": 160,
+      "version": "7",
+      "when": 1790200000000,
+      "tag": "0163_ship_contributors_airtable_record",
+      "breakpoints": true
+    },
+    {
+      "idx": 161,
+      "version": "7",
+      "when": 1790300000000,
+      "tag": "0164_shop_pending_changes",
+      "breakpoints": true
+    },
+    {
+      "idx": 162,
+      "version": "7",
+      "when": 1790400000000,
+      "tag": "0165_event_attendance_intent",
+      "breakpoints": true
+    },
+    {
+      "idx": 163,
+      "version": "7",
+      "when": 1790500000000,
+      "tag": "0166_event_attendee_attended",
+      "breakpoints": true
+    },
+    {
+      "idx": 164,
+      "version": "7",
+      "when": 1790600000000,
+      "tag": "0167_split_event_accommodation",
+      "breakpoints": true
+    },
+    {
+      "idx": 165,
+      "version": "7",
+      "when": 1790700000000,
+      "tag": "0168_system_actors",
+      "breakpoints": true
+    },
+    {
+      "idx": 166,
+      "version": "7",
+      "when": 1790800000000,
+      "tag": "0169_check_sla_and_escalation_ledger",
+      "breakpoints": true
+    },
+    {
+      "idx": 167,
+      "version": "7",
+      "when": 1790900000000,
+      "tag": "0170_priority_payouts",
+      "breakpoints": true
+    },
+    {
+      "idx": 168,
+      "version": "7",
+      "when": 1790990000000,
+      "tag": "0171_repair_cross_project_streak_inflation",
+      "breakpoints": true
+    },
+    {
+      "idx": 169,
+      "version": "7",
+      "when": 1791080000000,
+      "tag": "0172_repair_cross_project_streak_rewards",
+      "breakpoints": true
+    },
+    {
+      "idx": 170,
+      "version": "7",
+      "when": 1791170000000,
+      "tag": "0173_post_deadline_grace_ship",
+      "breakpoints": true
+    },
+    {
+      "idx": 171,
+      "version": "7",
+      "when": 1791260000000,
+      "tag": "0174_system_red_order_guard",
+      "breakpoints": true
+    },
+    {
+      "idx": 172,
+      "version": "7",
+      "when": 1791350000000,
+      "tag": "0175_drop_owo_uwu",
+      "breakpoints": true
+    }
+  ]
+}

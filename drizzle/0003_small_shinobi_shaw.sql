@@ -1,0 +1,1 @@
+ALTER TABLE "users" DROP COLUMN "hackatime_trust_level";
