@@ -7,10 +7,6 @@
     defineWebSite({ name: 'Macondo' }),
   ])
 
-  if (import.meta.server) {
-    defineOgImage('Macondo')
-  }
-
   const isProjects = computed(() => /^\/projects(\/|$)/.test(route.path))
   const isGuide = computed(() => /^\/guides(\/|$)/.test(route.path))
   const switcherClass = computed(() => {

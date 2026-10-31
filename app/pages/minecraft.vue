@@ -16,14 +16,6 @@ useSeoMeta({
   twitterCard: "summary_large_image",
 });
 
-// SSR only: client-side setup crashes (nuxt-modules/og-image#293).
-if (import.meta.server) {
-  defineOgImage("Macondo", {
-    title: t("seo.minecraft.ogTitle"),
-    description: t("seo.minecraft.description"),
-    kind: "doc",
-  });
-}
 
 useSchemaOrg([
   defineArticle({

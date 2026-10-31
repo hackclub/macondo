@@ -1,8 +1,17 @@
+import { createRequire } from "node:module";
+
+const resolveCertificateAsset = createRequire(import.meta.url).resolve;
+
 const hcbOauthSecret =
   process.env.NUXT_HCB_SECRET ||
   process.env.HCB_SECRET ||
   process.env.NUXT_HCB_API ||
   process.env.HCB_API;
+
+const archiveSocialImage = new URL(
+  "/og-macondo.webp",
+  process.env.NUXT_PUBLIC_SITE_URL || "https://macondo.hackclub.com",
+).href;
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -24,6 +33,13 @@ export default defineNuxtConfig({
     },
     compressPublicAssets: true,
     sourceMap: false,
+    // Satori's font shaper opens these files dynamically, beyond Nitro's JS tracing.
+    externals: {
+      traceInclude: [
+        resolveCertificateAsset("harfbuzzjs/hb.wasm"),
+        resolveCertificateAsset("harfbuzzjs/hb-subset.wasm"),
+      ],
+    },
     // Nitro defaults to es2019, which lacks the BigInt literals server/lib/invite-code.ts uses.
     esbuild: {
       options: {
@@ -47,19 +63,6 @@ export default defineNuxtConfig({
     // Theme lives in tailwind.config.ts: the typography plugin isn't serializable here.
   },
 
-  // Without this block @nuxt/image proxies images 1:1 and never converts to AVIF/WebP.
-  image: {
-    format: ["avif", "webp"],
-    quality: 80,
-    screens: {
-      xs: 360,
-      sm: 640,
-      md: 768,
-      lg: 1024,
-      xl: 1280,
-      "2xl": 1536,
-    },
-  },
 
   runtimeConfig: {
     redisUrl: process.env.REDIS_URL,
@@ -222,11 +225,13 @@ export default defineNuxtConfig({
 
   modules: [
     "@nuxt/fonts",
-    "@nuxt/image",
-    "@nuxtjs/seo",
-    // @nuxt/content must come after @nuxtjs/seo so its hooks see site config.
-    "@nuxt/content",
-    "@nuxtjs/device",
+    "nuxt-site-config",
+    "@nuxtjs/robots",
+    "@nuxtjs/sitemap",
+    "nuxt-schema-org",
+    "nuxt-seo-utils",
+    "@nuxtjs/mdc",
+    "./modules/docs-archive",
     "@nuxtjs/i18n",
     "@nuxtjs/tailwindcss",
   ],
@@ -267,11 +272,10 @@ export default defineNuxtConfig({
     ],
   },
 
-  ogImage: {
-    defaults: { width: 1200, height: 630 },
-  },
+  // The event archive uses one static social image instead of a renderer endpoint.
+  seo: { meta: { ogImage: archiveSocialImage, twitterImage: archiveSocialImage } },
 
-  // nuxt-og-image reads fonts from here; without `global: true` Satori falls back to sans-serif.
+  // Register the archive typography globally.
   fonts: {
     families: [
       {
@@ -307,48 +311,26 @@ export default defineNuxtConfig({
     },
   },
 
-  content: {
-    // Relative paths resolve inside .output/server, which the unprivileged runtime user
-    // can't write; /tmp always is. The DB is rebuilt from the bundled docs on startup.
-    database: {
-      type: "sqlite",
-      filename: "/tmp/macondo-contents.sqlite",
-    },
-    build: {
-      markdown: {
-        highlight: {
-          theme: {
-            default: "vitesse-light",
-            dark: "vitesse-light",
-          },
-          langs: [
-            "bash", "js", "ts", "vue", "html", "css", "json", "md", "yaml",
-            "python", "c", "cpp", "rust", "go", "sql", "diff", "shell",
-          ],
-        },
-      },
-    },
-  },
+  // Markdown and syntax highlighting are compiled by modules/docs-archive at build time.
+  mdc: { highlight: false },
 
   routeRules: {
     "/internal/**": {
       ssr: false,
       robots: false,
       sitemap: false,
-      ogImage: false,
     },
-    "/dashboard": { robots: false, sitemap: false, ogImage: false },
-    "/profile": { robots: false, sitemap: false, ogImage: false },
-    "/onboarding": { robots: false, sitemap: false, ogImage: false },
-    "/shop": { robots: false, sitemap: false, ogImage: false },
-    "/exchange": { robots: false, sitemap: false, ogImage: false },
-    "/notifications": { robots: false, sitemap: false, ogImage: false },
-    // OG images stay on so project links unfurl; noindex doesn't stop unfurlers.
+    "/dashboard": { robots: false, sitemap: false },
+    "/profile": { robots: false, sitemap: false },
+    "/onboarding": { robots: false, sitemap: false },
+    "/shop": { robots: false, sitemap: false },
+    "/exchange": { robots: false, sitemap: false },
+    "/notifications": { robots: false, sitemap: false },
     "/projects/**": { robots: false, sitemap: false },
-    "/support/**": { robots: false, sitemap: false, ogImage: false },
-    "/settings/**": { robots: false, sitemap: false, ogImage: false },
-    "/guides/**": { robots: false, sitemap: false, ogImage: false },
-    "/api/**": { robots: false, sitemap: false, ogImage: false },
+    "/support/**": { robots: false, sitemap: false },
+    "/settings/**": { robots: false, sitemap: false },
+    "/guides/**": { robots: false, sitemap: false },
+    "/api/**": { robots: false, sitemap: false },
     // No swr on "/": stale cached HTML after a deploy points at deleted /_nuxt chunks.
     "/": { sitemap: { priority: 1.0, changefreq: "weekly" } },
     "/minecraft": { sitemap: { priority: 0.9, changefreq: "monthly" } },

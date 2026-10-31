@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import DOMPurify from "isomorphic-dompurify";
+import HTMLSanitizer from "~/utils/sanitize";
 import MarkdownIt from "markdown-it";
 
 definePageMeta({
@@ -121,7 +121,7 @@ const auditTimelineExpanded = ref(false);
 const retrySyncingShipId = ref<number | null>(null);
 const retrySyncErrorByShip = ref<Record<number, string>>({});
 
-// HTML is enabled so authors can embed raw <img> tags; DOMPurify below is the safety boundary.
+// HTML is enabled so authors can embed raw <img> tags; HTMLSanitizer below is the safety boundary.
 const md = new MarkdownIt({
     html: true,
     linkify: true,
@@ -395,7 +395,7 @@ function formatFieldValue(value: unknown) {
 }
 
 function renderJournalHtml(markdown: string) {
-    return DOMPurify.sanitize(md.render(markdown), {
+    return HTMLSanitizer.sanitize(md.render(markdown), {
         ALLOWED_TAGS: [
             "p", "br", "strong", "em", "del", "s", "h1", "h2", "h3", "h4", "h5", "h6",
             "ul", "ol", "li", "pre", "code", "a", "img", "blockquote", "hr",

@@ -219,19 +219,7 @@ if (!props.embeddedProjectId) {
     ogType: "website",
     twitterCard: "summary_large_image",
   });
-  if (import.meta.server && ogData.value) {
-    defineOgImage("Project", {
-      title: ogData.value.name,
-      owner: ogData.value.ownerName,
-      ownerImage: ogData.value.ownerImage
-        ? `/api/og/thumb?u=${encodeURIComponent(ogData.value.ownerImage)}`
-        : undefined,
-      hours: ogData.value.hours,
-      image: ogData.value.hasThumbnail
-        ? `/api/og/thumb?u=${encodeURIComponent(ogData.value.thumbnailUrl ?? "")}`
-        : undefined,
-    });
-  }
+
 }
 
 const isOwner = computed(() => {

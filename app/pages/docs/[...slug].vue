@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { archivePage } from "~~/shared/docs-archive";
 const route = useRoute();
 const { locale } = useI18n();
 
@@ -18,9 +19,7 @@ const cacheKey = computed(
 const { data: page } = await useAsyncData(
   () => cacheKey.value,
   () =>
-    (locale.value === "es"
-      ? queryCollection("docs_es").path(localizedPath.value).first()
-      : queryCollection("docs_en").path(localizedPath.value).first()),
+    archivePage(locale.value, localizedPath.value),
   { watch: [locale] },
 );
 
@@ -40,14 +39,6 @@ useSeoMeta({
   ogType: "article",
   twitterCard: "summary_large_image",
 });
-
-if (import.meta.server) {
-  defineOgImage("Macondo", {
-    title: docTitle.value,
-    description: docDescription.value,
-    kind: "doc",
-  });
-}
 
 useSchemaOrg([
   defineArticle({
@@ -122,7 +113,7 @@ useDocsHighlight(".prose-brown", () => publicPath.value);
     </details>
 
     <div class="prose prose-sm prose-brown max-w-none">
-      <ContentRenderer v-if="page" :value="page" />
+      <MDCRenderer v-if="page" :body="page.body" :data="page" />
       <div v-else class="text-center py-12 not-prose">
         <h1 class="text-2xl font-bold text-ds-brown mb-2">{{ $t("docs.page_not_found") }}</h1>
         <p class="text-sm text-ds-brown/60">{{ $t("docs.page_not_found_body") }}</p>

@@ -79,17 +79,7 @@ if (!props.username) {
         ogType: "profile",
         twitterCard: "summary_large_image",
     });
-    if (import.meta.server && ogProfile.value) {
-        defineOgImage("Profile", {
-            username: ogProfile.value.username,
-            image: ogProfile.value.image
-                ? `/api/og/thumb?u=${encodeURIComponent(ogProfile.value.image)}`
-                : undefined,
-            projectCount: ogProfile.value.projectCount,
-            topStreakDays: ogProfile.value.topStreakDays,
-            totalUpvotes: ogProfile.value.totalUpvotes,
-        });
-    }
+
 }
 
 const profile = ref<PublicProfile | null>(null);

@@ -147,14 +147,10 @@ async function buildIndex(localeCode: "en" | "es"): Promise<void> {
   if (indexes.has(localeCode)) return;
   isLoading.value = true;
   try {
-    // extraFields puts frontmatter on each section chunk, avoiding a second query.
-    const rawSections = await (localeCode === "es"
-      ? queryCollectionSearchSections("docs_es", {
-          extraFields: ["section", "order", "icon", "description", "keywords"],
-        })
-      : queryCollectionSearchSections("docs_en", {
-          extraFields: ["section", "order", "icon", "description", "keywords"],
-        }));
+    const rawSections = await $fetch<Array<{
+      id: string; title: string; titles: string[]; level: number; content: string;
+      section?: string; order?: number; icon?: string; description?: string; keywords?: string;
+    }>>(`/_docs/search-${localeCode}.json`);
 
     // Heading chunks don't carry the page title, so map path -> title for breadcrumbs.
     const pageTitles = new Map<string, string>();

@@ -36,14 +36,6 @@ useSeoMeta({
   twitterCard: "summary_large_image",
 });
 
-if (import.meta.server) {
-  defineOgImage("Macondo", {
-    title: docTitle.value,
-    description: docDescription.value,
-    kind: "doc",
-  });
-}
-
 useSchemaOrg([
   defineArticle({
     headline: () => docTitle.value,

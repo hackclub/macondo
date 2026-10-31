@@ -1,13 +1,11 @@
 import { defineSitemapEventHandler } from "#imports";
-import { queryCollection } from "@nuxt/content/server";
+import { archiveDocs } from "~~/shared/docs-archive";
 import type { SitemapUrlInput } from "#sitemap/types";
 
 // en and es share one `/docs/<slug>` URL (i18n no_prefix), linked via hreflang alternates.
-export default defineSitemapEventHandler(async (e) => {
-  const [en, es] = await Promise.all([
-    queryCollection(e, "docs_en").select("path").all(),
-    queryCollection(e, "docs_es").select("path").all(),
-  ]);
+export default defineSitemapEventHandler(() => {
+  const en = archiveDocs("en");
+  const es = archiveDocs("es");
 
   const stripLocale = (p: string): string =>
     p.replace(/^\/docs\/(en|es)\/?/, "/docs/").replace(/\/+$/, "") || "/docs";

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { archiveDocs, archivePage } from "~~/shared/docs-archive";
 import * as icons from "lucide-vue-next";
 import { docSections, getSection } from "~/utils/docSections";
 
@@ -13,14 +14,6 @@ useSeoMeta({
   twitterCard: "summary_large_image",
 });
 
-if (import.meta.server) {
-  defineOgImage("Macondo", {
-    title: "Documentation",
-    description: "Guides for shipping hardware and software in Macondo.",
-    kind: "doc",
-  });
-}
-
 useHead({
   link: [
     { rel: "alternate", hreflang: "en", href: "/docs" },
@@ -29,25 +22,20 @@ useHead({
   ],
 });
 
-const collection = computed(() => (locale.value === "es" ? "docs_es" : "docs_en"));
 const sourcePath = computed(() => (locale.value === "es" ? "/docs/es" : "/docs/en"));
 const localePrefix = computed(() => (locale.value === "es" ? "/docs/es" : "/docs/en"));
 
 const { data: page } = await useAsyncData(
   () => `docs-index-${locale.value}`,
   () =>
-    (collection.value === "docs_es"
-      ? queryCollection("docs_es").path(sourcePath.value).first()
-      : queryCollection("docs_en").path(sourcePath.value).first()),
+    archivePage(locale.value, sourcePath.value),
   { watch: [locale] },
 );
 
 const { data: rawDocs } = await useAsyncData(
   () => `docs-landing-${locale.value}`,
   () => {
-    return collection.value === "docs_es"
-      ? queryCollection("docs_es").select("path", "title", "description", "section", "order", "icon").all()
-      : queryCollection("docs_en").select("path", "title", "description", "section", "order", "icon").all();
+    return Promise.resolve(archiveDocs(locale.value));
   },
   { watch: [locale] },
 );
@@ -153,7 +141,7 @@ function iconComponent(name: string | undefined) {
 <template>
   <div>
     <div class="prose prose-sm prose-brown max-w-none">
-      <ContentRenderer v-if="page" :value="page" />
+      <MDCRenderer v-if="page" :body="page.body" :data="page" />
       <div v-else class="text-center py-12 not-prose">
         <h1 class="text-2xl font-bold text-ds-brown mb-2">{{ t("docs.page_not_found") }}</h1>
         <p class="text-sm text-ds-brown/60">{{ t("docs.page_not_found_body") }}</p>

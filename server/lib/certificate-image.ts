@@ -1,6 +1,7 @@
 // Single visual source of truth: the PNG download, PDF and OG image all render through here.
 
 import satori from "satori";
+import { cachedCertificate } from "./certificate-cache";
 import { Resvg } from "@resvg/resvg-js";
 
 import { SPONSORS } from "./certificates";
@@ -338,39 +339,27 @@ function buildTree(
   );
 }
 
-// Rendering is expensive, so cache PNGs to blunt endpoint spam; bounded against floods of distinct codes.
-const renderCache = new Map<string, Buffer>();
+export async function renderCertificatePng(cert: PublicCertificate): Promise<Buffer> {
+  return cachedCertificate(cert, "png", async () => {
+    const [fonts, logos, macondoLogo, flag] = await Promise.all([
+      loadFonts(),
+      loadSponsorLogos(),
+      loadMacondoLogo(),
+      loadFlag(),
+    ]);
+    const svg = await satori(
+      buildTree(cert, logos, macondoLogo, flag) as unknown as Parameters<
+        typeof satori
+      >[0],
+      { width: WIDTH, height: HEIGHT, fonts },
+    );
+    const rendered = new Resvg(svg, {
+      fitTo: { mode: "width", value: WIDTH * 1.6 }, // render scale for 1920x1080 output
+    })
+      .render()
+      .asPng();
+    const png = Buffer.isBuffer(rendered) ? rendered : Buffer.from(rendered);
 
-export async function renderCertificatePng(
-  cert: PublicCertificate,
-): Promise<Buffer> {
-  const cacheKey = `${cert.code}:${cert.valid ? "v" : "r"}`;
-  const cached = renderCache.get(cacheKey);
-  if (cached) return cached;
-
-  const [fonts, logos, macondoLogo, flag] = await Promise.all([
-    loadFonts(),
-    loadSponsorLogos(),
-    loadMacondoLogo(),
-    loadFlag(),
-  ]);
-  const svg = await satori(
-    buildTree(cert, logos, macondoLogo, flag) as unknown as Parameters<
-      typeof satori
-    >[0],
-    { width: WIDTH, height: HEIGHT, fonts },
-  );
-  const rendered = new Resvg(svg, {
-    fitTo: { mode: "width", value: WIDTH * 1.6 }, // render scale for 1920x1080 output
-  })
-    .render()
-    .asPng();
-  const png = Buffer.isBuffer(rendered) ? rendered : Buffer.from(rendered);
-
-  if (renderCache.size >= 256) { // max cached certificate renders
-    const oldest = renderCache.keys().next().value;
-    if (oldest !== undefined) renderCache.delete(oldest);
-  }
-  renderCache.set(cacheKey, png);
-  return png;
+    return png;
+  });
 }

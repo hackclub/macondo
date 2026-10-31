@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import MarkdownIt from "markdown-it";
-import DOMPurify from "isomorphic-dompurify";
+import HTMLSanitizer from "~/utils/sanitize";
 import { ExternalLink } from "lucide-vue-next";
 
 interface GuideResponse {
@@ -55,7 +55,7 @@ md.core.ruler.after("linkify", "normalize_links", (state) => {
 const sanitizedHtml = computed(() => {
   const markdown = data.value?.markdown ?? "";
   if (!markdown) return "";
-  return DOMPurify.sanitize(md.render(markdown), {
+  return HTMLSanitizer.sanitize(md.render(markdown), {
     ALLOWED_TAGS: [
       "p", "br", "strong", "em", "del", "s", "h1", "h2", "h3", "h4", "h5", "h6",
       "ul", "ol", "li", "pre", "code", "a", "img", "blockquote", "hr",
@@ -113,14 +113,6 @@ useSeoMeta({
   ogType: "article",
   twitterCard: "summary_large_image",
 });
-
-if (import.meta.server) {
-  defineOgImage("Macondo", {
-    title: docTitle.value,
-    description: docDescription.value,
-    kind: "doc",
-  });
-}
 
 useSchemaOrg([
   defineArticle({

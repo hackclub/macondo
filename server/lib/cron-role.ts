@@ -1,5 +1,5 @@
-// The event is closed: background jobs and external syncs are off by default.
-// Only an explicit worker deployment should run the scheduled jobs.
+// The single production web instance also owns scheduled jobs and external syncs.
+// MACONDO_ROLE is no longer required; development and test processes stay idle.
 export function shouldRunCronPlugins(): boolean {
-  return (process.env.MACONDO_ROLE ?? "").trim().toLowerCase() === "worker";
+  return process.env.NODE_ENV === "production";
 }

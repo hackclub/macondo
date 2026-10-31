@@ -1,5 +1,5 @@
 import MarkdownIt from "markdown-it";
-import DOMPurify from "isomorphic-dompurify";
+import HTMLSanitizer from "./sanitize";
 
 // Only formats browsers can play inline.
 const PLAYABLE_VIDEO_EXTENSIONS = [".mp4", ".mov", ".webm", ".m4v"];
@@ -65,7 +65,7 @@ function buildMarkdown(): MarkdownIt {
 
 const md = buildMarkdown();
 
-// With html:false, the only <video> tags reaching DOMPurify are the ones our image rule emits.
+// With html:false, the only <video> tags reaching HTMLSanitizer are the ones our image rule emits.
 const ALLOWED_TAGS = [
   "p", "br", "strong", "em", "del", "s", "h1", "h2", "h3", "h4", "h5", "h6",
   "ul", "ol", "li", "pre", "code", "a", "img", "video", "blockquote", "hr",
@@ -78,7 +78,7 @@ const ALLOWED_ATTR = [
 
 // Shared by the published view and the editor preview so the two never drift.
 export function renderJournalMarkdown(source: string): string {
-  return DOMPurify.sanitize(md.render(source ?? ""), {
+  return HTMLSanitizer.sanitize(md.render(source ?? ""), {
     ALLOWED_TAGS,
     ALLOWED_ATTR,
     ALLOW_DATA_ATTR: false,

@@ -128,14 +128,10 @@ const rewardDeployed = ref(false);
 async function onSubStepComplete(code: { html: string; css: string; readme: string }) {
   if (advancing.value) return;
   advancing.value = true;
-  // set first so captureScreenshot uses the latest code
   userHtml.value = code.html;
   userCss.value = code.css;
   userReadme.value = code.readme;
 
-  if (currentSubStep.value === 4) {
-    screenshotUrl.value = await captureScreenshot();
-  }
   tinkerCode.value = { html: "", css: "", readme: "" };
   tinkerChallengesCompleted.value = [];
   tutorialPhase.value = "goal";
@@ -325,14 +321,7 @@ async function deployToGitHub() {
   deploying.value = true;
   deployError.value = "";
   try {
-    if (!screenshotUrl.value) {
-      screenshotUrl.value = await captureScreenshot();
-    }
-    const imgUrl = screenshotUrl.value;
-    let readmeWithImage = userReadme.value || '';
-    if (imgUrl && imgUrl.length > 0 && !readmeWithImage.includes('## Preview')) {
-      readmeWithImage += `\n\n## Preview\n\n![Website Preview](${imgUrl})\n`;
-    }
+    const readme = userReadme.value || '';
 
     const res = await $fetch<{ pages_url: string; repo_url: string }>("/api/github/push", {
       method: "POST",
@@ -340,7 +329,7 @@ async function deployToGitHub() {
         repo: repoFullName.value,
         html: userHtml.value,
         css: userCss.value,
-        readme: readmeWithImage,
+        readme: readme,
       },
     });
     pagesUrl.value = res.pages_url;
@@ -377,79 +366,6 @@ async function pollForSite(url: string) {
   }
   pollTimedOut.value = true;
 }
-
-async function captureScreenshot(): Promise<string | null> {
-  try {
-    const { default: html2canvas } = await import("html2canvas");
-
-    let fullHtml = userHtml.value;
-    if (userCss.value) {
-      const styleTag = `<style>${userCss.value}</style>`;
-      if (fullHtml.includes("</head>")) {
-        fullHtml = fullHtml.replace("</head>", `${styleTag}</head>`);
-      } else {
-        fullHtml = styleTag + fullHtml;
-      }
-    }
-
-    let bodyContent = fullHtml.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] || fullHtml;
-    const styleTags = [...fullHtml.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)].map(m => m[1]).join("\n");
-
-    // inline images as data URLs via the server proxy to avoid CORS
-    const imgUrls = [...new Set([...bodyContent.matchAll(/src\s*=\s*["']([^"']+)["']/gi)].map(m => m[1]).filter(u => u?.startsWith("http")))];
-    for (const url of imgUrls) {
-      try {
-        const res = await $fetch<{ dataUrl: string }>("/api/proxy", { params: { url } });
-        if (res.dataUrl) bodyContent = bodyContent.split(url!).join(res.dataUrl);
-      } catch { /* skip */ }
-    }
-
-    const bodyInlineStyle = fullHtml.match(/<body[^>]*style\s*=\s*"([^"]*)"/i)?.[1] || "";
-
-    const container = document.createElement("div");
-    container.style.cssText = "position:fixed;left:-9999px;top:0;width:800px;height:600px;overflow:hidden;z-index:-1;";
-
-    // Reset Tailwind preflight + scope user CSS to #screenshot-root
-    const resetStyle = document.createElement("style");
-    resetStyle.textContent = `#screenshot-root, #screenshot-root * { all: revert; } #screenshot-root { width:800px;min-height:600px; } ${styleTags ? styleTags.replace(/\bbody\b/g, "#screenshot-root") : ""}`;
-    container.appendChild(resetStyle);
-
-    // attached to the real page, where inline handlers like onerror fire in the app's origin.
-    const { default: DOMPurify } = await import("isomorphic-dompurify");
-    const contentDiv = document.createElement("div");
-    contentDiv.id = "screenshot-root";
-    contentDiv.style.cssText = `width:800px;min-height:600px;${bodyInlineStyle}`;
-    contentDiv.innerHTML = DOMPurify.sanitize(bodyContent);
-    container.appendChild(contentDiv);
-    document.body.appendChild(container);
-
-    await new Promise(r => setTimeout(r, 300)); // let the dom render before capture
-
-    const canvas = await html2canvas(contentDiv, {
-      width: 800,
-      height: 600,
-      scale: 1,
-    });
-
-    document.body.removeChild(container);
-
-    const blob = await new Promise<Blob | null>((resolve) =>
-      canvas.toBlob(resolve, "image/png"),
-    );
-    if (!blob) return null;
-    const formData = new FormData();
-    formData.append("file", blob, "screenshot.png");
-    return (await $fetch<{ url: string }>("/api/upload-image", {
-      method: "POST",
-      body: formData,
-    })).url;
-  } catch (e) {
-    console.error("Screenshot capture failed:", e);
-    return null;
-  }
-}
-
-const screenshotUrl = ref<string | null>(null);
 
 async function devResetOnboarding() {
   await $fetch("/api/onboarding", {

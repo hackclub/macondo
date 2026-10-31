@@ -45,8 +45,7 @@ export function isAllowedMime(mime: string): boolean {
 // --- Magic-byte sniffing -----------------------------------------------------
 // isAllowedMime trusts the client-declared Content-Type, so a polyglot (HTML or
 // a script smuggled as image/png) could otherwise ride onto the CDN. These
-// checks are defense in depth on top of the separate-origin CDN and the sharp
-// re-encode on the OG path.
+// checks are defense in depth on top of the separate-origin CDN.
 
 function hasPrefix(bytes: Uint8Array, prefix: number[], offset = 0): boolean {
   if (bytes.length < offset + prefix.length) return false;

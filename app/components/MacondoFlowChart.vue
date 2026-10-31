@@ -1,14 +1,6 @@
 <script setup lang="ts">
-import { VueFlow, useVueFlow, MarkerType, type Node, type Edge } from "@vue-flow/core";
-import "@vue-flow/core/dist/style.css";
-import { markRaw, onMounted, onUnmounted, nextTick } from "vue";
-import MacondoFlowNode from "./MacondoFlowNode.vue";
-import MacondoFlowEdge from "./MacondoFlowEdge.vue";
-
-const { updateNodeInternals, fitView } = useVueFlow();
-
-// explicit width/height so the first paint doesn't wait on ResizeObserver measurement
-const nodes: Node[] = [
+// This diagram has no interactive controls. Native SVG scales it without a canvas runtime.
+const nodes = [
   {
     id: "1",
     type: "macondo",
@@ -104,179 +96,56 @@ const nodes: Node[] = [
   },
 ];
 
-// the built-in marker lives in the edge svg, so url(#...) resolves reliably, unlike an external <marker>
-const arrowMarker = { type: MarkerType.ArrowClosed, color: "#684D3A", width: 9, height: 9 };
-
-const edges: Edge[] = [
-  { id: "1-2", source: "1", target: "2", type: "macondo", markerEnd: arrowMarker },
-  { id: "2-3a", source: "2", target: "3a", type: "macondo", markerEnd: arrowMarker },
-  { id: "2-track", source: "2", target: "track", type: "macondo", markerEnd: arrowMarker },
-  { id: "track-3b", source: "track", target: "3b", type: "macondo", markerEnd: arrowMarker },
-  { id: "3a-4a", source: "3a", target: "4a", type: "macondo", markerEnd: arrowMarker },
-  { id: "3b-earn", source: "3b", target: "earn", type: "macondo", markerEnd: arrowMarker },
-  { id: "4a-5", source: "4a", target: "5", type: "macondo", markerEnd: arrowMarker },
-  { id: "5-4b", source: "5", target: "4b", type: "macondo", markerEnd: arrowMarker },
-  { id: "earn-4b", source: "earn", target: "4b", type: "macondo", data: { label: "arrow_spend" }, markerEnd: arrowMarker },
-  {
-    id: "5-3a",
-    source: "5",
-    target: "3a",
-    type: "macondo",
-    sourceHandle: "left",
-    targetHandle: "left-in",
-    data: { label: "arrow_loop", dashed: true },
-    markerEnd: arrowMarker,
-  },
-  {
-    id: "earn-track",
-    source: "earn",
-    target: "track",
-    type: "macondo",
-    sourceHandle: "right",
-    targetHandle: "right-in",
-    data: { label: "arrow_loop_software", dashed: true },
-    markerEnd: arrowMarker,
-  },
+const connections = [
+  ["1", "2"], ["2", "3a"], ["2", "track"], ["track", "3b"],
+  ["3a", "4a"], ["3b", "earn"], ["4a", "5"], ["5", "4b"], ["earn", "4b"],
 ];
-
-// markRaw keeps Vue from wrapping the component definitions in reactivity (Vue Flow warns otherwise).
-const nodeTypes = {
-  macondo: markRaw(MacondoFlowNode),
-};
-const edgeTypes = {
-  macondo: markRaw(MacondoFlowEdge),
-};
-
-// vue flow hides nodes until measured, and under <ClientOnly> that can stall,
-// so re-measure after mount so edges start from the correct handles
-let resizeHandler: (() => void) | null = null;
-
-onMounted(async () => {
-  await nextTick();
-  updateNodeInternals(nodes.map((n) => n.id));
-  // fit after a delay too, or wide viewports stay at zoom=1
-  await nextTick();
-  setTimeout(() => fitView({ padding: 0.05, duration: 0 }), 50); // short delay so layout has settled
-  resizeHandler = () => {
-    fitView({ padding: 0.05, duration: 150 });
-  };
-  window.addEventListener("resize", resizeHandler);
-});
-
-onUnmounted(() => {
-  if (resizeHandler) window.removeEventListener("resize", resizeHandler);
+const paths = connections.map(([source, target]) => {
+  const from = nodes.find(node => node.id === source)!;
+  const to = nodes.find(node => node.id === target)!;
+  const x = from.position.x + 110, y = from.position.y + 120;
+  const tx = to.position.x + 110, ty = to.position.y;
+  const mid = (y + ty) / 2;
+  return `M ${x} ${y} C ${x} ${mid} ${tx} ${mid} ${tx} ${ty}`;
 });
 </script>
 
 <template>
-  <div class="macondo-flow-wrapper relative mx-auto" style="width: 100%; max-width: clamp(760px, 65vw, 1100px); aspect-ratio: 760 / 1100;">
-    <!-- the canvas is purely visual, so screen readers get the node sequence as a list -->
+  <div class="macondo-flow-wrapper relative mx-auto w-full max-w-[1100px]">
     <ol class="sr-only" :aria-label="$t('landing.flow.sr_label')">
-      <li v-for="(node, i) in nodes" :key="node.id">
+      <li v-for="node in nodes" :key="node.id">
         <strong>{{ node.data.numberLabel }} {{ $t(node.data.titleKey) }}</strong>:
         {{ $t(node.data.bodyKey) }}
-        <span v-if="i < nodes.length - 1"> {{ $t('landing.flow.then') }} </span>
       </li>
     </ol>
-    <div aria-hidden="true" class="absolute inset-0">
-    <VueFlow
-      :nodes="nodes"
-      :edges="edges"
-      :node-types="nodeTypes"
-      :edge-types="edgeTypes"
-      :pan-on-drag="false"
-      :pan-on-scroll="false"
-      :zoom-on-scroll="false"
-      :zoom-on-pinch="false"
-      :zoom-on-double-click="false"
-      :nodes-draggable="false"
-      :nodes-connectable="false"
-      :elements-selectable="false"
-      :min-zoom="0.5"
-      :max-zoom="1.5"
-      :fit-view-on-init="true"
-      :default-viewport="{ x: 0, y: 20, zoom: 1 }"
-      :prevent-scrolling="false"
-      class="macondo-flow"
-    />
-
-    <!-- circle around node 4b, whose wrapper center is ~(380, 1025) with viewport.y=20 -->
-    <svg
-      class="absolute inset-0 w-full h-full pointer-events-none"
-      viewBox="0 0 760 1100"
-      preserveAspectRatio="none"
-      style="overflow: visible; z-index: 20;"
-      aria-hidden="true"
-    >
-      <path
-        d="M 250 1039 C 253 985 310 970 380 970 C 450 970 510 985 510 1039 C 513 1093 450 1108 380 1108 C 310 1108 245 1093 253 1037"
-        stroke="#F2BF40"
-        stroke-width="11"
-        fill="none"
-        stroke-linecap="round"
-        opacity="0.5"
-      />
+    <svg class="w-full h-auto overflow-visible" viewBox="-65 -10 890 1130" aria-hidden="true">
+      <defs>
+        <marker id="macondo-flow-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+          <path d="M0 0 L7 3.5 L0 7 Z" fill="#684D3A" />
+        </marker>
+      </defs>
+      <g fill="none" stroke="#684D3A" stroke-width="3.5" marker-end="url(#macondo-flow-arrow)">
+        <path v-for="path in paths" :key="path" :d="path" />
+        <path d="M40 780 C-100 780 -100 460 40 460" stroke-dasharray="8 7" />
+        <path d="M720 780 C860 780 860 460 720 460" stroke-dasharray="8 7" />
+      </g>
+      <path d="M250 1020 C250 940 510 940 510 1020 C510 1110 250 1110 250 1020" fill="none" stroke="#F2BF40" stroke-width="11" opacity="0.5" />
+      <foreignObject v-for="node in nodes" :key="node.id" :x="node.position.x" :y="node.position.y" width="220" height="130">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="bg-parchment border-[3px] border-ds-brown p-3 shadow-md min-h-[100px] flex items-start gap-2">
+          <img :src="node.data.fruitSrc" class="w-7 h-7 object-contain shrink-0" alt="" loading="lazy">
+          <div>
+            <p class="font-satoro font-bold text-ds-brown text-sm leading-tight">{{ node.data.numberLabel }} {{ $t(node.data.titleKey) }}</p>
+            <p class="text-[11px] text-ds-brown/80 leading-snug mt-0.5">{{ $t(node.data.bodyKey) }}</p>
+          </div>
+        </div>
+      </foreignObject>
+      <g fill="#684D3A" text-anchor="middle" class="font-satoro font-bold" font-size="16">
+        <text x="150" y="350">Hardware</text>
+        <text x="610" y="350">Software</text>
+        <text x="380" y="925">↪ {{ $t('landing.flow.arrow_spend') }}</text>
+        <text x="150" y="880">↺ {{ $t('landing.flow.arrow_loop') }}</text>
+        <text x="610" y="880">↻ {{ $t('landing.flow.arrow_loop_software') }}</text>
+      </g>
     </svg>
-
-    <div
-      class="absolute font-satoro font-bold text-ds-cream text-sm uppercase tracking-widest text-center bg-ds-brown border-[3px] border-ds-brown shadow-md"
-      style="writing-mode: vertical-rl; text-orientation: upright; letter-spacing: 2px; left: -1%; top: 56.8%; transform: translateY(-50%); padding: 16px 5px; z-index: 5;"
-    >
-      Hardware
-    </div>
-    <div
-      class="absolute font-satoro font-bold text-ds-cream text-sm uppercase tracking-widest text-center bg-ds-brown border-[3px] border-ds-brown shadow-md"
-      style="writing-mode: vertical-rl; text-orientation: upright; letter-spacing: 2px; right: -1%; top: 56.8%; transform: translateY(-50%); padding: 16px 5px; z-index: 5;"
-    >
-      Software
-    </div>
-
-    <div
-      class="absolute font-satoro font-bold text-ds-brown text-xs sm:text-sm bg-ds-cream px-2 py-0.5 border-2 border-ds-brown shadow-sm whitespace-nowrap"
-      style="left: 50%; top: 85%; transform: translate(-50%, -50%) rotate(-4deg); z-index: 10;"
-    >
-      ↪ {{ $t("landing.flow.arrow_spend") }}
-    </div>
-    <div
-      class="absolute font-satoro font-bold text-ds-brown text-xs sm:text-sm bg-ds-cream px-2 py-0.5 border-2 border-ds-brown shadow-sm whitespace-nowrap"
-      style="left: -2%; top: 71%; transform: translate(-50%, -50%) rotate(-7deg); z-index: 10;"
-    >
-      ↺ {{ $t("landing.flow.arrow_loop") }}
-    </div>
-    <div
-      class="absolute font-satoro font-bold text-ds-brown text-xs sm:text-sm bg-ds-cream px-2 py-0.5 border-2 border-ds-brown shadow-sm whitespace-nowrap"
-      style="right: -2%; top: 71%; transform: translate(50%, -50%) rotate(7deg); z-index: 10;"
-    >
-      ↻ {{ $t("landing.flow.arrow_loop_software") }}
-    </div>
-    </div>
   </div>
 </template>
-
-<style scoped>
-.macondo-flow :deep(.vue-flow__background),
-.macondo-flow :deep(.vue-flow__minimap),
-.macondo-flow :deep(.vue-flow__controls),
-.macondo-flow :deep(.vue-flow__attribution) {
-  display: none;
-}
-.macondo-flow :deep(.vue-flow__pane) {
-  cursor: default;
-}
-.macondo-flow :deep(.vue-flow__renderer),
-.macondo-flow :deep(.vue-flow__viewport) {
-  background: transparent;
-}
-/* loop edges bow past the svg viewBox, and vue flow clips at several nesting levels */
-.macondo-flow,
-.macondo-flow :deep(*) {
-  overflow: visible !important;
-}
-.macondo-flow-wrapper {
-  overflow: visible;
-}
-/* Nodes already carry their own border/shadow via Tailwind — strip Vue Flow defaults */
-.macondo-flow :deep(.vue-flow__node) {
-  box-shadow: none;
-}
-</style>

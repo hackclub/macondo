@@ -14,14 +14,7 @@ useSeoMeta({
   twitterCard: "summary_large_image",
 });
 
-// SSR only: the auth middleware's client-side redirect here would make it throw (nuxt-modules/og-image#293).
-if (import.meta.server) {
-  defineOgImage("Macondo", {
-    title: "Macondo",
-    description: "Make personal projects. Win free prizes.",
-    kind: "site",
-  });
-}
+
 const loginRequired = computed(() => route.query.login === "required");
 
 type LandingProject = {
@@ -238,7 +231,7 @@ onUnmounted(() => {
   if (cloudScrollRaf) cancelAnimationFrame(cloudScrollRaf);
 });
 
-// CSS hiding still mounts the chart, so phones would download the heavy @vue-flow chunk without this.
+// Keep the detailed diagram off the smallest screens.
 const showDesktopFlow = ref(false);
 let flowMedia: MediaQueryList | null = null;
 function syncShowDesktopFlow() {

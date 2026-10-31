@@ -16,14 +16,6 @@ useSeoMeta({
     twitterCard: "summary_large_image",
 });
 
-// defineOgImage must only run during SSR: a client-only setup context throws.
-if (import.meta.server) {
-    defineOgImage("Macondo", {
-        title: "Macondo in Bogotá",
-        description: "An in-person Hack Club event. August 14 to 16, Bogotá, Colombia.",
-        kind: "site",
-    });
-}
 
 const PARENT_GUIDE_URL =
     "https://docs.google.com/document/d/1d5U6ghcQ7bTcDZYKWEddcjryAVB7d6rIDgIrXQJpgCg/edit";

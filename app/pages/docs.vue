@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { archiveDocs } from "~~/shared/docs-archive";
 import * as icons from "lucide-vue-next";
 import { ArrowLeft } from "lucide-vue-next";
 import { docSections } from "~/utils/docSections";
@@ -43,9 +44,7 @@ interface DocPageMeta {
 const { data: rawDocs } = await useAsyncData(
   () => `docs-nav-${locale.value}`,
   () => {
-    return queryCollection(locale.value === "es" ? "docs_es" : "docs_en")
-      .select("path", "title", "section", "order", "icon", "group", "groupTitle", "groupOrder")
-      .all();
+    return Promise.resolve(archiveDocs(locale.value));
   },
   { watch: [locale] },
 );

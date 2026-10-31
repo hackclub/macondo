@@ -1,10 +1,10 @@
-// markdown-it + DOMPurify are ~150KB, so they're loaded lazily once; don't import them directly.
+// Markdown rendering and HTML sanitization load on demand and share one bundle.
 
 import type MarkdownIt from "markdown-it";
-import type DOMPurify from "isomorphic-dompurify";
+import type HTMLSanitizer from "./sanitize";
 
 type MarkdownInstance = MarkdownIt;
-type DOMPurifyInstance = typeof DOMPurify;
+type SanitizerInstance = typeof HTMLSanitizer;
 
 type Renderer = {
   renderSafeMarkdown: (
@@ -18,21 +18,21 @@ type Renderer = {
 };
 
 let cachedBundle:
-  | { md: MarkdownInstance; purify: DOMPurifyInstance }
+  | { md: MarkdownInstance; purify: SanitizerInstance }
   | null = null;
 let cachedPromise:
-  | Promise<{ md: MarkdownInstance; purify: DOMPurifyInstance }>
+  | Promise<{ md: MarkdownInstance; purify: SanitizerInstance }>
   | null = null;
 
 async function loadBundle(): Promise<{
   md: MarkdownInstance;
-  purify: DOMPurifyInstance;
+  purify: SanitizerInstance;
 }> {
   if (cachedBundle) return cachedBundle;
   if (cachedPromise) return cachedPromise;
   cachedPromise = (async () => {
     const [{ default: MarkdownItCtor }, { default: purify }] =
-      await Promise.all([import("markdown-it"), import("isomorphic-dompurify")]);
+      await Promise.all([import("markdown-it"), import("./sanitize")]);
     cachedBundle = { md: new MarkdownItCtor(), purify };
     return cachedBundle;
   })();

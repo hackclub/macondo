@@ -1,13 +1,12 @@
 // Embeds the same satori PNG as the image endpoint so the two never drift.
 
-import { PDFDocument } from "pdf-lib";
 
 import {
   getCertificateByCode,
   toPublicCertificate,
   tryNormalizeCertificateCode,
 } from "~~/server/lib/certificates";
-import { renderCertificatePng } from "~~/server/lib/certificate-image";
+import { renderCertificatePdf } from "~~/server/lib/certificate-pdf";
 import { checkRateLimits } from "~~/server/lib/rate-limit";
 import { getSession } from "~~/server/lib/session";
 
@@ -62,15 +61,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const pub = toPublicCertificate(found.cert, found.username);
-  const png = await renderCertificatePng(pub);
-
-  const pdf = await PDFDocument.create();
-  const image = await pdf.embedPng(png);
-  // 1:1 with the render, so the page is exactly 1920x1080.
-  const pageW = image.width;
-  const pageH = image.height;
-  pdf.addPage([pageW, pageH]).drawImage(image, { x: 0, y: 0, width: pageW, height: pageH });
-  const bytes = await pdf.save();
+  const bytes = await renderCertificatePdf(pub);
 
   setHeader(event, "content-type", "application/pdf");
   setHeader(
