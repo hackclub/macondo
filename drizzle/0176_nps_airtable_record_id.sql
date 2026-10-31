@@ -1,1 +1,1 @@
-ALTER TABLE "nps_responses" ADD COLUMN "airtable_record_id" text;
+ALTER TABLE "nps_responses" ADD COLUMN IF NOT EXISTS "airtable_record_id" text;
