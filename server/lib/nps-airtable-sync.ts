@@ -13,11 +13,11 @@ type AirtableCreateResponse = {
   records: { id: string; fields: Record<string, unknown> }[];
 };
 
-function unifiedToken(): string | null {
+function npsAirtableToken(): string | null {
   const config = useRuntimeConfig();
   return (
-    (config as unknown as { airtableUnifiedToken?: string })
-      .airtableUnifiedToken || null
+    (config as unknown as { npsAirtableToken?: string })
+      .npsAirtableToken || null
   );
 }
 
@@ -54,7 +54,7 @@ export async function syncNpsToAirtable(): Promise<{
   errors: number;
   remaining: number;
 }> {
-  const token = unifiedToken();
+  const token = npsAirtableToken();
   if (!token) {
     return { synced: 0, errors: 0, remaining: 0 };
   }
