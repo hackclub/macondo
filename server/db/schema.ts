@@ -1688,6 +1688,7 @@ export const npsResponseTable = pgTable(
       () => users.id,
       { onDelete: "set null" },
     ),
+    airtable_record_id: text("airtable_record_id"),
   },
   (t) => ({
     userCreatedIdx: index("nps_responses_user_created_idx").on(
