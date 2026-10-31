@@ -191,6 +191,10 @@ export default defineNuxtConfig({
       process.env.NUXT_AIRTABLE_UNIFIED_TOKEN ||
       process.env.AIRTABLE_UNIFIED_TOKEN ||
       "",
+    npsAirtableToken:
+      process.env.NUXT_NPS_AIRTABLE_TOKEN ||
+      process.env.NPS_AIRTABLE_TOKEN ||
+      "",
     theseusApiKey:
       process.env.NUXT_THESEUS_API_KEY ||
       process.env.THESEUS_API_KEY,
