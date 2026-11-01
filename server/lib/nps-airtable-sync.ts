@@ -36,7 +36,6 @@ function toAirtableFields(row: {
     "What are we doing well?": row.doing_well,
     "How can we improve?": row.can_improve,
     "Override Created At": row.created_at.toISOString(),
-    "Tags (Comma Separated)": "macondo",
   };
 
   if (row.email) {
